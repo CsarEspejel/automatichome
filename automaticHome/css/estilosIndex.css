@@ -1,0 +1,27 @@
+body{
+  font-family: "Poppins", sans-serif;
+  background-image: url();
+}
+
+.jumbotron{
+  height: auto;
+  margin: 0 0 0 0;
+  padding: inherit;
+  background-color: transparent;
+}
+
+/* img{
+  padding: .25rem;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: .25rem;
+  max-width: 6%;
+  height: auto;
+    position: fixed;
+} */
+
+div.row{
+  padding: 2.5%;
+  padding-bottom: 1%;
+  width: 100%;
+}
