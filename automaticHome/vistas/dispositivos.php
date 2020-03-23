@@ -1,19 +1,18 @@
 <?php
-session_start();
+  session_start();
 
-$varSession = $_SESSION['admon'];
-error_reporting(0);
-if ($varSession == null || $varSession == '') {
-  header("Location: ../index.php");
-  die();
-}
+  $varSession = $_SESSION['admon'];
+  error_reporting(0);
+  if ($varSession == null || $varSession == '') {
+    header("Location: ../index.php");
+    die();
+  }
 
 ?>
 
 <?php
   require '../controlador/accionesDispositivo.php';
   $resultado = leerDatos();
-  $inmuebles = getInmuebles(); 
   $usuarios = getUsuarios();
 ?>
 
@@ -86,22 +85,22 @@ if ($varSession == null || $varSession == '') {
               <div class="form-group">
                 <input type="text" class="form-control" hidden="true" name="accion" readonly id="agregar" value="agregar">
               </div>
-              <div class="form-group">
+              <!-- <div class="form-group">
                 <label for="admin">Sesión Actual:</label>
-                <input type="text" class="form-control" name="admin" readonly id="admin" value="<?php echo $varSession; ?>">
-              </div>
+                <input type="text" class="form-control" name="admin" readonly id="admin" value="<?php //echo $varSession; ?>">
+              </div> -->
               <div class="form-group">
                 <label for="usuario_id">Propietario:</label>
-                <select class="custom-select" name="usuario_id" id="usuario_id">
+                <select class="custom-select" name="usuario_id" id="usuario_id" >
                   <option selected>Elije un usuario</option>
                   <?php 
-                    while ($dato = $usuarios->fetch()) {
-                      echo "<option value='".$dato['usuario_id']."'>".$dato['username']."</option>";
+                    while ($datoU = $usuarios->fetch()) {
+                      echo "<option value='".$datoU['usuario_id']."'>".$datoU['username']."</option>";
                     }
                   ?>
                 </select>
               </div>
-              <div class="form-group">
+              <div class="form-group" id="inmu">
                 <!-- <label for="inmueble_id">Inmueble:</label>
                 <select class="custom-select" name="inmueble_id" id="inmueble_id">
                   <option selected>Elije un inmueble para el dispositivo</option>
@@ -111,7 +110,6 @@ if ($varSession == null || $varSession == '') {
                     // }
                   ?>
                 </select> -->
-                <div id="listaInmuebles"></div>
               </div>
               <div class="form-group">
                 <label for="clave_dispositivo">Clave del dispositivo:</label>
@@ -138,44 +136,36 @@ if ($varSession == null || $varSession == '') {
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="modalEditarLabel">Editar inmueble</h5>
+            <h5 class="modal-title" id="modalEditarLabel">Editar dispositivo</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            <form name="formulario" id="formuE" action="../controlador/accionesInmueble.php" method="post">
+            <form name="formulario" id="formuE" action="../controlador/accionesDispositivo.php" method="post">
               <div class="form-group">
                 <input type="text" class="form-control" hidden="true" name="accion" readonly id="actualizar" value="actualizar">
               </div>
-              <div class="form-group">
+              <!-- <div class="form-group">
                 <label for="admin">Sesión Actual:</label>
-                <input type="text" class="form-control" name="admin" readonly id="admin" value="<?php echo $varSession; ?>">
-              </div>
+                <input type="text" class="form-control" name="admin" readonly id="admin" value="<?php //echo $varSession; ?>">
+              </div> -->
               <div class="form-group">
-                <input type="text" class="form-control" name="inmueble_idE" id="inmueble_idE" hide="true" readonly>
-                <label for="usuario_idE">Propietario del inmueble:</label>
+                <input type="text" class="form-control" name="dispositivo_idE" id="dispositivo_idE" readonly>
+                <label for="usuario_idE">Propietario:</label>
                 <input type="text" class="form-control" name="usuario_idE" id="usuario_idE" readonly>
               </div>
               <div class="form-group">
-                <label for="calle_numeroE">Calle y número:</label>
-                <input type="text" class="form-control" name="calle_numeroE" id="calle_numeroE" required="true" placeholder="Ingresa la calle y el número" autocomplete="off">
+                <label for="inmueble_idE">Inmueble:</label>
+                <input type="text" class="form-control" name="inmueble_idE" id="inmueble_idE" readonly>
               </div>
               <div class="form-group">
-                <label for="coloniaE">Colonia:</label>
-                <input type="text" class="form-control" name="coloniaE" id="coloniaE" required="true" placeholder="Inserta la colonia" autocomplete="off">
-              </div>
-              <div class="form-group">
-                <label for="estadoE">Estado:</label>
-                <input type="text" class="form-control" name="estadoE" id="estadoE" required="true" placeholder="Ingresa el estado" autocomplete="off">
-              </div>
-              <div class="form-group">
-                <label for="codigo_postalE">Código postal:</label>
-                <input type="text" class="form-control" name="codigo_postalE" id="codigo_postalE" required="true" placeholder="Ingresa tu código postal" autocomplete="off">
+                <label for="clave_dispositivoE">Clave del dispositivo:</label>
+                <input type="text" class="form-control" name="clave_dispositivoE" id="clave_dispositivoE" required="true" placeholder="Ingresa la clave del dispositivo" autocomplete="off">
               </div>
               <div class="form-group">
                 <label for="descripcionE">Descripción:</label>
-                <input type="textarea" class="form-control" name="descripcionE" id="descripcionE" required="true" placeholder="Ingresa una breve descripción del dispositivo" autocomplete="off">
+                <input type="text" class="form-control" name="descripcionE" id="descripcionE" required="true" placeholder="Ingresa una breve descripción del dispositivo" autocomplete="off">
               </div>
               <div class="modal-footer">
                 <button type="button" id="btnCerrar" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -230,13 +220,11 @@ if ($varSession == null || $varSession == '') {
                   echo "<td>".$datos['clave_dispositivo']."</td>";
                   echo "<td>".$datos['descripcion']."</td>";
 
-                  // $datosEditar = [$datos['inmueble_id'], $datos['nombre'], $datos['calle_numero'], $datos['colonia'], $datos['estado'], $datos['codigo_postal'], $datos['descripcion'] ];
+                  $datosEditar = [$datos['dispositivo_id'], $datos['username'], $datos['calle_numero'], $datos['clave_dispositivo'], $datos['descripcion'] ];
                   // echo $datosEditar."<br>";
-                  // $datosEditar = json_encode($datosEditar);
-                  echo "<td><button class='btn btn-primary' data-toggle='modal' data-target='#modalEditar' onclick='rellenaFormInmueble($datosEditar);'>Editar</button>";
-                  // echo "<a class='btn btn-danger' href='../controlador/eliminarUsuario.php?accion=delUsuario&usuario=".$datos['username']."'>Eliminar</a>";
-                  // echo "<a class='btn btn-danger' onclick='eliminarInmueble(".$datos['inmueble_id'].");' >Eliminar</a>";
-                  echo "<a href='#' class='btn btn-danger' data-href='../controlador/accionesInmueble.php?accion=eliminar&inmueble_id=".$datos['inmueble_id']."' data-toggle='modal' data-target='#modalEliminar'>Eliminar</a>";
+                  $datosEditar = json_encode($datosEditar);
+                  echo "<td><button class='btn btn-primary' data-toggle='modal' data-target='#modalEditar' onclick='rellenaFormDispositivo($datosEditar);'>Editar</button>";
+                  echo "<a href='#' class='btn btn-danger' data-href='../controlador/accionesDispositivo.php?accion=eliminar&dispositivo_id=".$datos['dispositivo_id']."' data-toggle='modal' data-target='#modalEliminar'>Eliminar</a>";
               echo "</tr>";
             }
           ?>
@@ -247,10 +235,11 @@ if ($varSession == null || $varSession == '') {
   
 
   <!-- Sección de scripts -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+    <!-- <script src="../js/jquery-3.2.1.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-
-    <!-- <script>
+    <script>
       window.onload = function () {
         const formu = document.getElementById("formu");
         formu.addEventListener('submit', validarFormulario);
@@ -290,32 +279,28 @@ if ($varSession == null || $varSession == '') {
         if (todoCorrecto == true) {formulario.submit();}
         else {alert("No debe de haber datos en blanco o con solo números, verifícalos. Editar");}
       }
-    </script> -->
-    
-    <!-- <script>
-      $(document).ready(function(){
-        recargarListaInmuebles();
-
-        $("#usuario_id").change(function(){
-          recargarListaInmuebles();
-        })
-      });
     </script>
+
     <script>
-      function recargarListaInmuebles(){
+
+      $('#usuario_id').change(function(){
+        var valor = $('#usuario_id').val();
         $.ajax({
-          type:"POST",
-          url:"accionesDispositivo.php",
-          data:"usuario=" + $('#usuario_id').val();
-          success:function(r){
-            $('#listaInmuebles').html(r);
+          type : 'POST',
+          url : '../controlador/accionesDispositivo.php',
+          data : {'valor' : valor},
+          success : function(r){
+            $('#inmu').html(r);
+            console.log("resultado: "+r);
+          },
+          error : function(xhr, status){
+            console.log("Hubo un error");
           }
         });
-      }
-    </script> -->
+      });
+    </script>
 
     <script type="text/javascript" src="../js/acciones.js"></script>
-    <!-- <script src="../js/jquery-3.2.1.min.js"></script> -->
     <script src="../js/bootstrap.min.js" charset="utf-8"></script>
   </body>
 </html>
