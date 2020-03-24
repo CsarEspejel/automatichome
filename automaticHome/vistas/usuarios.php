@@ -83,10 +83,10 @@ if ($varSession == null || $varSession == '') {
               <div class="form-group">
                 <input type="text" class="form-control" hidden="true" name="accion" readonly id="agregar" value="agregar">
               </div>
-              <div class="form-group">
+              <!-- <div class="form-group">
                 <label for="admin">Sesión Actual:</label>
-                <input type="text" class="form-control" name="admin" readonly id="admin" value="<?php echo $varSession; ?>">
-              </div>
+                <input type="text" class="form-control" name="admin" readonly id="admin" value="<?php //echo $varSession; ?>">
+              </div> -->
               <div class="form-group">
                 <label for="nombre">Nombre:</label>
                 <input type="text" class="form-control" name="nombre" id="nombre" required="true" placeholder="Ingresa el nombre" autocomplete="off">
@@ -143,10 +143,10 @@ if ($varSession == null || $varSession == '') {
               <div class="form-group">
                 <input type="text" class="form-control" hidden="true" name="accion" readonly id="actualizar" value="actualizar">
               </div>
-              <div class="form-group">
+              <!-- <div class="form-group">
                 <label for="admin">Sesión Actual:</label>
-                <input type="text" class="form-control" name="adminE" readonly id="adminE" value="<?php echo $varSession; ?>">
-              </div>
+                <input type="text" class="form-control" name="adminE" readonly id="adminE" value="<?php //echo $varSession; ?>">
+              </div> -->
               <div class="form-group">
                 <label for="nombreE">Nombre:</label>
                 <input type="text" class="form-control" name="nombreE" id="nombreE" required="true" placeholder="Ingresa el nombre" autocomplete="off">

@@ -160,10 +160,32 @@ function setDispositivo($inmueble_id, $clave_dispositivo, $descripcion){
   return $consulta->execute();
 }
 
+function updateDispositivo($dispositivo_id, $clave_dispositivo, $descripcion){
+  global $con;
+  $consulta = "UPDATE dispositivo SET
+              clave_dispositivo=:clave_dispositivo, descripcion=:descripcion
+              WHERE dispositivo_id=:dispositivo_id";
+  $consulta = $con->prepare($consulta);
+  $consulta->bindParam(":clave_dispositivo", $clave_dispositivo, PDO::PARAM_STR);
+  $consulta->bindParam(":descripcion", $descripcion, PDO::PARAM_STR);
+  $consulta->bindParam(":dispositivo_id", $dispositivo_id, PDO::PARAM_INT);
+  return $consulta->execute();
+}
+
+function deleteDispositivo($dispositivo_id){
+  global $con;
+  $consulta = "DELETE FROM dispositivo WHERE dispositivo_id=:dispositivo_id";
+  $consulta = $con->prepare($consulta);
+  $consulta->bindParam(":dispositivo_id", $dispositivo_id, PDO::PARAM_INT);
+  return $consulta->execute();
+}
+
 //Función que regresa los datos de los inmuebles dependiendo del usuario seleccionado.
-// function getInmuebleUsuario($usuario){
-//   $consulta = "SELECT * FROM inmueble WHERE usuario_id=$usuario";
-//   $resultado = $con->query($consulta);
-//   return $resultado;
-// }
+function getInmuebleUsuario($usuario){
+  global $con;
+  $consulta = "SELECT i.inmueble_id, i.calle_numero FROM inmueble i WHERE usuario_id='$usuario'";
+  $resultado = $con->query($consulta);
+  return $resultado;
+}
+
 ?>
