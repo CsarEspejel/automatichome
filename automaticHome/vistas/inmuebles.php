@@ -85,10 +85,10 @@ if ($varSession == null || $varSession == '') {
               <div class="form-group">
                 <input type="text" class="form-control" hidden="true" name="accion" readonly id="agregar" value="agregar">
               </div>
-              <div class="form-group">
+              <!-- <div class="form-group">
                 <label for="admin">Sesión Actual:</label>
-                <input type="text" class="form-control" name="admin" readonly id="admin" value="<?php echo $varSession; ?>">
-              </div>
+                <input type="text" class="form-control" name="admin" readonly id="admin" value="<?php //echo $varSession; ?>">
+              </div> -->
               <div class="form-group">
                 <label for="usuario_id">Propietario:</label>
                 <select class="custom-select" name="usuario_id" id="usuario_id">
@@ -114,7 +114,7 @@ if ($varSession == null || $varSession == '') {
               </div>
               <div class="form-group">
                 <label for="codigo_postal">Código postal:</label>
-                <input type="text" class="form-control" name="codigo_postal" id="codigo_postal" required="true" placeholder="Ingresa tu código postal" autocomplete="off">
+                <input type="number" class="form-control" name="codigo_postal" id="codigo_postal" required="true" placeholder="Ingresa tu código postal" autocomplete="off">
               </div>
               <div class="form-group">
                 <label for="descripcion">Descripción:</label>
@@ -155,10 +155,10 @@ if ($varSession == null || $varSession == '') {
               <div class="form-group">
                 <input type="text" class="form-control" hidden="true" name="accion" readonly id="actualizar" value="actualizar">
               </div>
-              <div class="form-group">
+              <!-- <div class="form-group">
                 <label for="admin">Sesión Actual:</label>
-                <input type="text" class="form-control" name="admin" readonly id="admin" value="<?php echo $varSession; ?>">
-              </div>
+                <input type="text" class="form-control" name="admin" readonly id="admin" value="<?php //echo $varSession; ?>">
+              </div> -->
               <div class="form-group">
                 <!-- <input type="text" class="form-control" name="inmueble_idE" id="inmueble_idE" hide="true" readonly> -->
                 <label for="usuario_idE">Propietario del inmueble:</label>
@@ -178,7 +178,7 @@ if ($varSession == null || $varSession == '') {
               </div>
               <div class="form-group">
                 <label for="codigo_postalE">Código postal:</label>
-                <input type="text" class="form-control" name="codigo_postalE" id="codigo_postalE" required="true" placeholder="Ingresa tu código postal" autocomplete="off">
+                <input type="number" class="form-control" name="codigo_postalE" id="codigo_postalE" required="true" placeholder="Ingresa tu código postal" autocomplete="off">
               </div>
               <div class="form-group">
                 <label for="descripcionE">Descripción:</label>
