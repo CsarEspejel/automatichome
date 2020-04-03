@@ -8,7 +8,7 @@
   * Cierre de sesión.
 - Error:
   * Al editar y eliminar dispositivos.
-- Versión beta 1.1:
+-Versión beta 1.1:
 - Novedades:
   * Se agregaron las funciones faltantes de eliminar y editar los dispositivos.
   * Se corrigieron pequeños errores.
